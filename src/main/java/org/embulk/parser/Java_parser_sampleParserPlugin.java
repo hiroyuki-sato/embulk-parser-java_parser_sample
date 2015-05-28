@@ -20,6 +20,17 @@ import org.embulk.spi.util.LineDecoder;
 import org.embulk.spi.type.TimestampType;
 import org.embulk.spi.time.TimestampParser;
 import org.embulk.spi.time.TimestampParseException;
+//
+import org.embulk.spi.ColumnConfig;
+//
+import java.util.ArrayList;
+//
+import static org.embulk.spi.type.Types.BOOLEAN;
+import static org.embulk.spi.type.Types.DOUBLE;
+import static org.embulk.spi.type.Types.LONG;
+import static org.embulk.spi.type.Types.STRING;
+import static org.embulk.spi.type.Types.TIMESTAMP;
+
 
 public class Java_parser_sampleParserPlugin
         implements ParserPlugin
@@ -45,7 +56,12 @@ public class Java_parser_sampleParserPlugin
     public void transaction(ConfigSource config, ParserPlugin.Control control)
     {
         PluginTask task = config.loadConfig(PluginTask.class);
+        ArrayList<ColumnConfig> columns = new ArrayList<ColumnConfig>();
+        columns.add(new ColumnConfig("hoge",STRING ,null));
 
+        //
+        // Schema
+        //
         Schema schema = task.getColumns().toSchema();
 
         control.run(task.dump(), schema);
