@@ -45,11 +45,11 @@ public class Java_parser_sampleParserPlugin
         @Config("property2")
         @ConfigDefault("0")
         public int getProperty2();
-*/
 
         // TODO get schema from config or data source
         @Config("columns")
         public SchemaConfig getColumns();
+*/
     }
 
     @Override
@@ -59,10 +59,11 @@ public class Java_parser_sampleParserPlugin
         ArrayList<ColumnConfig> columns = new ArrayList<ColumnConfig>();
         columns.add(new ColumnConfig("hoge",STRING ,null));
 
+        Schema schema = new SchemaConfig(columns).toSchema();
         //
         // Schema
         //
-        Schema schema = task.getColumns().toSchema();
+        //Schema schema = task.getColumns().toSchema();
 
         control.run(task.dump(), schema);
     }
